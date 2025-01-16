@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:weightSum="4"
+    android:layout_gravity="center"
+    android:background="#f3feb8"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="#56ffb22c">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/tifnagh"
+            android:gravity="center"
+            android:text="ⵍⴰⵔⵏ ⵟⵉⴼⵉⵏⴰⴳⵀ ⵡⵉⵜⵀ ⴼⵓⵏ"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:shadowColor="#000"
+            android:shadowRadius="2"
+            android:shadowDx="2"
+            android:shadowDy="4"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="2"
+        android:background="#39ff4c4c">
+
+        <Button
+            android:id="@+id/alphabet"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/back1"
+            android:drawableLeft="@drawable/alphabet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.066"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.098" />
+
+        <Button
+            android:id="@+id/game1"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/back1"
+            android:backgroundTint="#FFDE4D"
+            android:drawableLeft="@drawable/game1"
+            android:onClick="onClickGame1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.933"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.106" />
+
+        <Button
+            android:id="@+id/game2"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/back1"
+            android:backgroundTint="#FFDE4D"
+            android:drawableLeft="@drawable/game2"
+            android:onClick="onClickGame2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.066"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.795" />
+
+        <Button
+            android:id="@+id/rhyme"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/back1"
+            android:backgroundTint="#FFDE4D"
+            android:drawableLeft="@drawable/rhyme"
+            android:onClick="onClickrhyme"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.896"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.809" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="#7594FD">
+        <TextView
+            android:id="@+id/contactus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text=" للإتصال او اقتراح بعض الاقسام للتطبيق اضغط هنا"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:shadowColor="#000"
+            android:shadowRadius="2"
+            android:shadowDx="2"
+            android:shadowDy="4"
+            android:autoLink="web"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+</LinearLayout>
