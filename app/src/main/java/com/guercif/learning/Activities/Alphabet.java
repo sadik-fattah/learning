@@ -3,6 +3,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +18,8 @@ import com.guercif.learning.R;
 
 public class Alphabet extends AppCompatActivity implements View.OnClickListener{
     ImageButton previous, refresh, next;
-    TextView text;
+   // TextView text;
+    ImageView letterImage;
     int count;
     MediaPlayer audio;
     int[] id = {R.raw.ya,R.raw.yab,R.raw.yag,R.raw.yad,
@@ -42,7 +44,8 @@ public class Alphabet extends AppCompatActivity implements View.OnClickListener{
         previous = findViewById(R.id.previous);
         refresh = findViewById(R.id.refresh);
         next = findViewById(R.id.next);
-        text = findViewById(R.id.letter);
+         letterImage = findViewById(R.id.letter_image);
+     //   text = findViewById(R.id.letter);
         audio = MediaPlayer.create(this, id[count]);
         audio.start();
 
@@ -54,6 +57,29 @@ public class Alphabet extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        if (view.getId() == R.id.next) {
+            if (count < 32) {
+                count++;
+                letterImage.setImageResource(alphabet(count)); // Set image resource
+                audio = MediaPlayer.create(this, id[count]);
+                audio.start();
+            } else {
+                Toast.makeText(this, "End of Alphabet", Toast.LENGTH_SHORT).show();
+            }
+        } else if (view.getId() == R.id.previous) {
+            if (count > 0) {
+                count--;
+                letterImage.setImageResource(alphabet(count)); // Set image resource
+            } else {
+                Toast.makeText(this, "Start of Alphabet", Toast.LENGTH_SHORT).show();
+            }
+        } else if (view.getId() == R.id.refresh) {
+            audio.start();
+        }
+    }
+/*
+    @Override
+    public void onClick(View view) {
         if (view.getId()==R.id.next){
             if(count != 32){
                 audio.stop();
@@ -61,11 +87,13 @@ public class Alphabet extends AppCompatActivity implements View.OnClickListener{
                 text.setText(alphabet(count));
                 audio = MediaPlayer.create(this, id[count]);
                 audio.start();
-            }else {
+            }
+            else {
                 Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
             }
 
-        } else if (view.getId() == R.id.previous) {
+        }
+        else if (view.getId() == R.id.previous) {
             if (count !=0){
                 count --;
                 text.setText(alphabet(count));
@@ -77,11 +105,17 @@ public class Alphabet extends AppCompatActivity implements View.OnClickListener{
         }
     }
     private String alphabet(int n){
-        char part1 = (char) ('ⴰ'+ n);
+        char part1 = (char) ('a'+ n);
         //char part2 = (char) ('a'+n);
         String a1 = Character.toString(part1);
         // String a2 = Character.toString(part2);
         String ans = a1;
         return ans;
-    }
+    }*/
+private int alphabet(int n) {
+    // Assuming your images are named tifinagh_0, tifinagh_1, ..., tifinagh_32
+    // This assumes you have 33 images, adjust as necessary
+    return getResources().getIdentifier("tifinagh_" + n, "drawable", getPackageName());
+}
+
 }
