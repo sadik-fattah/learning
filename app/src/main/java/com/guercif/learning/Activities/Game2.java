@@ -15,17 +15,23 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.guercif.learning.R;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 
 public class Game2 extends AppCompatActivity implements View.OnClickListener{
     Button opt1, opt2, opt3, opt4;
     ImageButton imageRefresh;
     MediaPlayer audio;
     int count = 0;
-    String comb1 = "ⵎⴱⵓⴷⵕⴻⵙⴽⵛⵃⵟⵅⵢⵉⵥⵍⵯⵊⵣⵇⵡⵄⵜⵀⵚⴼⵖⴹⵔⴳⵏⴰ";
-    String comb2 = "ⵎⴰⵍⵯⵏⴱⵊⵥⵓⴳⵉⵣⵔⴷⵇⵢⵕⴹⵅⵡⵖⴻⵄⵟⵙⴼⵃⵜⵚⴽⵀⵛ";
-    String comb3 = "ⴰⵎⵯⵍⴱⵏⵥⵊⴳⵓⵣⵉⴷⵔⵢⵇⴷⵔⵡⵅⴻⵖⵟⵄⴼⵙⵜⵃⴽⵚⵛⵀ";
-    String comb4 = "ⴽⵚⵎⴰⴽⵚⵏⴱⴼⵙⵔⴷⴼⵙⵕⴹⴻⵖⵀⵛⵯⵍⵃⵜⵥⵊⵄⵟⵣⵉⵅⵡⵢⵇ";
-    String ans = "ⴰⴱⴳⴷⴹⴻⴼⴽⵀⵃⵄⵅⵇⵉⵊⵍⵎⵏⵓⵔⵕⵖⵙⵚⵛⵜⵟⵡⵢⵣⵥⵯ";
+
+    String ans    = "ⴰⴱⴳⴷⴹⴻⴼⴽⵀⵃⵄⵅⵇⵉⵊⵍⵎⵏⵓⵔⵕⵖⵙⵚⵛⵜⵟⵡⵢⵣⵥⵯ";
+    String comb1  = "ⵔⵇⵕⵥⵅⴰⵜⴳⵢⵟⵖⴷⵓⴱⴹⵙⵎⴻⵛⵏⴽⵚⵉⵣⴼⵍⵄⵃⵡⵀⵊⵯ";
+    String  comb2 = "ⵟⵚⵖⵎⵣⵅⴷⵢⴳⴰⵙⵥⵃⵡⴼⵓⵯⵔⵄⴽⴹⴱⵛⴻⵉⵇⵍⵜⵀⵏⵊⵕ";
+    String  comb3 = "ⵍⵚⵕⵛⵊⵙⵅⴻⴼⵎⵏⵉⴷⵢⵔⵃⵣⵀⵄⵜⴳⵇⵥⴱⵟⵡⵖⵓⴰⴽⵯⴹ";
+    String  comb4 = "ⴽⵃⵜⵛⴰⵡⵀⵄⵎⵙⴼⵯⴷⴳⵊⴱⵉⵟⵓⵔⵢⵕⵣⵏⵖⴻⵥⴹⵅⵇⵚⵍ";
+
     int[] id = {R.raw.ya, R.raw.yab,R.raw.yag,R.raw.yad,
             R.raw.yadd,R.raw.yey, R.raw.yaf,R.raw.yak,
             R.raw.yah, R.raw.yahh,R.raw.yaa, R.raw.yakh,
@@ -45,6 +51,9 @@ public class Game2 extends AppCompatActivity implements View.OnClickListener{
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+
         opt1 = findViewById(R.id.opt1);
         opt2 = findViewById(R.id.opt2);
         opt3 = findViewById(R.id.opt3);
@@ -74,7 +83,7 @@ public class Game2 extends AppCompatActivity implements View.OnClickListener{
 
         if (s.compareTo(st) == 0) {
             count++;
-            if (count == 26) {
+            if (count == 31) {
                 count = 0;
             }
             opt1.setText(Character.toString(comb1.charAt(count)));

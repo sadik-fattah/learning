@@ -19,10 +19,11 @@ import com.guercif.learning.R;
 public class Alphabet extends AppCompatActivity implements View.OnClickListener{
     ImageButton previous, refresh, next;
    // TextView text;
-    ImageView letterImage;
-    int count;
-    MediaPlayer audio;
-    int[] id = {R.raw.ya,R.raw.yab,R.raw.yag,R.raw.yad,
+    private ImageView letterImage;
+    private int count = 0;
+    private MediaPlayer mediaPlayer;
+
+    private int[] audioId = {R.raw.ya,R.raw.yab,R.raw.yag,R.raw.yad,
             R.raw.yadd,R.raw.yey, R.raw.yaf,R.raw.yak,
             R.raw.yah, R.raw.yahh,R.raw.yaa, R.raw.yakh,
             R.raw.yaq, R.raw.yi,R.raw.yazh,R.raw.yal,
@@ -30,6 +31,17 @@ public class Alphabet extends AppCompatActivity implements View.OnClickListener{
             R.raw.yarr, R.raw.yagh,R.raw.yas,R.raw.yass,
             R.raw.yach, R.raw.yat, R.raw.yatt,R.raw.yaw,
             R.raw.yay, R.raw.yaz,R.raw.yazz,R.raw.ow};
+private int [] imageId = {
+        R.drawable.tifinagh_0,R.drawable.tifinagh_1,R.drawable.tifinagh_2,R.drawable.tifinagh_3,
+        R.drawable.tifinagh_4,R.drawable.tifinagh_5,R.drawable.tifinagh_6,R.drawable.tifinagh_7,
+        R.drawable.tifinagh_8,R.drawable.tifinagh_9,R.drawable.tifinagh_10,R.drawable.tifinagh_11,
+        R.drawable.tifinagh_12,R.drawable.tifinagh_13,R.drawable.tifinagh_14,R.drawable.tifinagh_15,
+        R.drawable.tifinagh_16,R.drawable.tifinagh_17,R.drawable.tifinagh_18,R.drawable.tifinagh_19,
+        R.drawable.tifinagh_20,R.drawable.tifinagh_21,R.drawable.tifinagh_22,R.drawable.tifinagh_23,
+        R.drawable.tifinagh_24,R.drawable.tifinagh_25,R.drawable.tifinagh_26,R.drawable.tifinagh_27,
+        R.drawable.tifinagh_28,R.drawable.tifinagh_29,R.drawable.tifinagh_30,R.drawable.tifinagh_31,
+
+};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,77 +57,52 @@ public class Alphabet extends AppCompatActivity implements View.OnClickListener{
         refresh = findViewById(R.id.refresh);
         next = findViewById(R.id.next);
          letterImage = findViewById(R.id.letter_image);
-     //   text = findViewById(R.id.letter);
-        audio = MediaPlayer.create(this, id[count]);
-        audio.start();
+
+
 
         previous.setOnClickListener(this);
         refresh.setOnClickListener(this);
         next.setOnClickListener(this);
+        updateContent();
+    }
 
+    private void updateContent() {
+        letterImage.setImageResource(imageId[count]);
+        if (mediaPlayer !=null){
+            mediaPlayer.release();
+        }
+        mediaPlayer = MediaPlayer.create(this, audioId[count]);
+        mediaPlayer.start();
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.next) {
-            if (count < 32) {
+            if (count < audioId.length -1 ) {
                 count++;
-                letterImage.setImageResource(alphabet(count)); // Set image resource
-                audio = MediaPlayer.create(this, id[count]);
-                audio.start();
+            updateContent();
             } else {
                 Toast.makeText(this, "End of Alphabet", Toast.LENGTH_SHORT).show();
             }
         } else if (view.getId() == R.id.previous) {
             if (count > 0) {
                 count--;
-                letterImage.setImageResource(alphabet(count)); // Set image resource
+              updateContent();
             } else {
                 Toast.makeText(this, "Start of Alphabet", Toast.LENGTH_SHORT).show();
             }
         } else if (view.getId() == R.id.refresh) {
-            audio.start();
+         mediaPlayer.start();
         }
     }
-/*
+
+
     @Override
-    public void onClick(View view) {
-        if (view.getId()==R.id.next){
-            if(count != 32){
-                audio.stop();
-                count++;
-                text.setText(alphabet(count));
-                audio = MediaPlayer.create(this, id[count]);
-                audio.start();
-            }
-            else {
-                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-        else if (view.getId() == R.id.previous) {
-            if (count !=0){
-                count --;
-                text.setText(alphabet(count));
-            }else {
-                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-            }
-        } else if (view.getId() == R.id.refresh) {
-            audio.start();
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null){
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
     }
-    private String alphabet(int n){
-        char part1 = (char) ('a'+ n);
-        //char part2 = (char) ('a'+n);
-        String a1 = Character.toString(part1);
-        // String a2 = Character.toString(part2);
-        String ans = a1;
-        return ans;
-    }*/
-private int alphabet(int n) {
-    // Assuming your images are named tifinagh_0, tifinagh_1, ..., tifinagh_32
-    // This assumes you have 33 images, adjust as necessary
-    return getResources().getIdentifier("tifinagh_" + n, "drawable", getPackageName());
-}
-
 }
