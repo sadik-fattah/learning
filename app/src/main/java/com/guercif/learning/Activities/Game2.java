@@ -1,10 +1,13 @@
 package com.guercif.learning.Activities;
 
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -18,13 +21,16 @@ import com.guercif.learning.R;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 
 public class Game2 extends AppCompatActivity implements View.OnClickListener{
     Button opt1, opt2, opt3, opt4;
     ImageButton imageRefresh;
+    TextView scoreText;
     MediaPlayer audio;
     int count = 0;
+    int score = 0;
 
     String ans    = "ⴰⴱⴳⴷⴹⴻⴼⴽⵀⵃⵄⵅⵇⵉⵊⵍⵎⵏⵓⵔⵕⵖⵙⵚⵛⵜⵟⵡⵢⵣⵥⵯ";
     String comb1  = "ⵔⵇⵕⵥⵅⴰⵜⴳⵢⵟⵖⴷⵓⴱⴹⵙⵎⴻⵛⵏⴽⵚⵉⵣⴼⵍⵄⵃⵡⵀⵊⵯ";
@@ -53,20 +59,14 @@ public class Game2 extends AppCompatActivity implements View.OnClickListener{
         });
 
 
-
         opt1 = findViewById(R.id.opt1);
         opt2 = findViewById(R.id.opt2);
         opt3 = findViewById(R.id.opt3);
         opt4 = findViewById(R.id.opt4);
-
         imageRefresh = findViewById(R.id.imageRefresh);
+        scoreText = findViewById(R.id.scoreText);
 
-        audio = MediaPlayer.create(this, id[count]);
-
-        opt1.setText(Character.toString(comb1.charAt(count)));
-        opt2.setText(Character.toString(comb2.charAt(count)));
-        opt3.setText(Character.toString(comb3.charAt(count)));
-        opt4.setText(Character.toString(comb4.charAt(count)));
+        setupNewQuestion();
 
         opt1.setOnClickListener(this);
         opt2.setOnClickListener(this);
@@ -75,27 +75,55 @@ public class Game2 extends AppCompatActivity implements View.OnClickListener{
         imageRefresh.setOnClickListener(v -> audio.start());
     }
 
+    private void setupNewQuestion() {
+        audio = MediaPlayer.create(this, id[count]);
+        audio.start();
+
+        List<String> options = new ArrayList<>();
+        options.add(Character.toString(comb1.charAt(count)));
+        options.add(Character.toString(comb2.charAt(count)));
+        options.add(Character.toString(comb3.charAt(count)));
+        options.add(Character.toString(comb4.charAt(count)));
+
+
+        String correctAnswer = Character.toString(ans.charAt(count));
+        Random random = new Random();
+        options.set(random.nextInt(4), correctAnswer);
+
+
+
+
+        opt1.setText(options.get(0));
+        opt2.setText(options.get(1));
+        opt3.setText(options.get(2));
+        opt4.setText(options.get(3));
+    }
+
     @Override
     public void onClick(View view) {
         Button b = (Button) view;
-        String s = b.getText().toString();
-        String st = Character.toString(ans.charAt(count));
+        String selectedAnswer = b.getText().toString();
+        String correctAnswer = Character.toString(ans.charAt(count));
 
-        if (s.compareTo(st) == 0) {
-            count++;
-            if (count == 31) {
-                count = 0;
-            }
-            opt1.setText(Character.toString(comb1.charAt(count)));
-            opt2.setText(Character.toString(comb2.charAt(count)));
-            opt3.setText(Character.toString(comb3.charAt(count)));
-            opt4.setText(Character.toString(comb4.charAt(count)));
+        if (selectedAnswer.equals(correctAnswer)) {
+            score++;
+            scoreText.setText("Score: " + score);
+           // b.setBackgroundColor(Color.GREEN);
 
-            audio = MediaPlayer.create(this, id[count]);
-            audio.start();
+            new Handler().postDelayed(() -> {
+              //  b.setBackgroundColor(Color.LTGRAY);
+                count++;
+                if (count == ans.length()) {
+                    count = 0;
+                    Toast.makeText(this, "You've completed the game!", Toast.LENGTH_SHORT).show();
+                }
+                setupNewQuestion();
+            }, 1000);
         } else {
-            Toast.makeText(this, "Wrong Answer...Replay the audio", Toast.LENGTH_SHORT).show();
-        }
+           // b.setBackgroundColor(Color.RED);
+            Toast.makeText(this, "Wrong Answer! Try again.", Toast.LENGTH_SHORT).show();
 
+           // new Handler().postDelayed(() -> b.setBackgroundColor(Color.LTGRAY), 1000);
+        }
     }
 }

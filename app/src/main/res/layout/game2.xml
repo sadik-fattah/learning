@@ -64,7 +64,10 @@
 
     </LinearLayout>
 
-
+<TextView android:id="@+id/scoreText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Score :"/>
     <ImageButton
         android:id="@+id/imageRefresh"
         android:layout_width="match_parent"
